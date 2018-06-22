@@ -89,4 +89,9 @@ app.controller('orderCtrl', function($scope, $http) {
      $scope.hideForm = function(){
         $scope.isCreateVisible = false;
      }
+
+     $scope.cancelForm = function(){
+         $scope.isCreateVisible = false;
+         $scope.invisible = false;
+     }
 });

@@ -54,7 +54,8 @@
         <p>Ordered Item: <input type="text" ng-model="oitem"></p>
         <p>Order Cost: <input type="text" ng-model="ocost"></p>
         <p>Order Date: <input type="text" ng-model="odate"></p>
-        <p><input type="submit" value="submit"></p>
+        <p><input class="btn" type="submit" value="Save">
+        <button class="btn" type="button" ng-click="cancelForm()">Cancel</button></p>
 
     </form>
     </div>
@@ -66,7 +67,8 @@
         Ordered Item: <input type="text" ng-model="_orderedItem"><br>
         Order Cost: <input type="text" ng-model="_orderCost"><br>
         Order Date: <input type="text" ng-model="_orderDate"><br>
-        p><input type="submit" value="submit"></p>
+        <input class="btn" type="submit" value="Save">
+        <button class="btn"type="button" ng-click="cancelForm()">Cancel</button>
     </form>
     </div>
 </div>
