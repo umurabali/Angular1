@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<body>
+<link rel="stylesheet" type="text/css" href="./lib/style.css">
+<link rel="stylesheet" type="text/css" href="./lib/bootstrap.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
-<div ng-app="myApp" ng-controller="customersCtrl">
-    <tr class="w3-container">
 
-        <table class="w3-table w3-bordered w3-striped">
-            <tr>
+<div class="reu-container" ng-app="myApp" ng-controller="orderCtrl" >
+    <tr class="w3-container ">
+    <div class = mini-header>AngularJS Crud Application </div>
+        <table>
+            <tr class="td-color">
                 <th>Delete</th>
                 <th>Edit</th>
                 <th>Order ID</th>
@@ -19,14 +21,14 @@
                 <th>Order Date</th>
             </tr>
 
-
         <tr ng-repeat="x in myData">
-            <td>
-                <button class="w3-btn w3-ripple" ng-click="deleteData(x._id)">Delete</button>
+            <td align ="center">
+                <button class="btn delete_btn" ng-click="deleteData(x._id)"><i class="fas fa-times"></i></button>
             </td>
             <td>
-                <button class="w3-btn w3-ripple" ng-click="editData(x)">Edit</button>
+                <button class="btn" ng-click="editData(x)">Edit</button>
             </td>
+
                <td>{{x.orderId}}</td>
                <td>{{x.companyName}}</td>
                <td>{{x.customerAddress}}</td>
@@ -36,92 +38,33 @@
         </tr>
 
         </table>
-
-    <button ng-click="updateData()">Refresh</button><br>
-
+    <div class ="row">
+    <div class="col-md-6">
+        {{infoMessage}}
+    </div>
+    <div class="col-md-6 " align="right">
+        <right><button class="btn btn-secondary" ng-click="updateData()">Refresh</button></right>
+    </div>
+    </div>
 
     <form ng-submit="createData()">
         <p>Orderid: <input type="text" ng-model="orderid"></p>
         <p>CompanyName: <input type="text" ng-model="cname"></p>
         <p><input type="submit" value="submit"></p>
     </form>
-
-    <form ng-submit="editData()">
+    <div ng-show = "invisible">
+    <form ng-submit="saveData(uniqueid)">
         OrderID: <input type="text" ng-model="_orderId"><br>
         Company Name: <input type="text" ng-model="_companyName"><br>
         Customer Address: <input type="text" ng-model="_customerAddress"><br>
         Ordered Item: <input type="text" ng-model="_orderedItem"><br>
         Order Cost: <input type="text" ng-model="_orderCost"><br>
         Order Date: <input type="text" ng-model="_orderDate"><br>
+        p><input type="submit" value="submit"></p>
     </form>
-
-
-
-
+    </div>
 </div>
 </div>
-<script>
-    var app = angular.module('myApp', []);
-    app.controller('customersCtrl', function($scope, $http) {
-
-        $scope.updateData = function() {
-            $http({
-                method : "GET",
-                url : "http://localhost:3000/orders"
-            }).then(function (response) {
-                $scope.myData = response.data;
-            });
-        }
-        $scope.updateData(); // Initial data load
-        $scope.activeItem = "";
-        $scope.setActive = function(activeitem) {
-            $scope.activeItem = activeitem;
-        }
-
-        $scope.deleteData = function(itemId) {
-            $http({
-                method : "DELETE",
-                url : "http://localhost:3000/orders/" + itemId
-            }).then(function(response) {
-                console.log(response.data);
-                $scope.updateData();
-            });
-        }
-        $scope.orderid = "";
-        $scope.cname = "";
-        $scope.caddress= "ehu";
-        $scope.oitem = "hue";
-        $scope.ocost = "";
-        $scope.odate = "";
-
-        $scope.createData = function() {
-            var newData = {
-                orderId: $scope.orderid,
-                companyName: $scope.cname,
-                customerAddress: $scope.caddress,
-                orderedItem: $scope.oitem,
-                orderCost: $scope.ocost,
-                orderDate: $scope.odate
-            }
-
-            $http({
-                method: "POST",
-                url: "http://localhost:3000/orders/",
-                data: newData
-            }).then(function(response) {
-                console.log(response.data);
-                $scope.updateData();
-            });
-        }
-        $scope.editData = function(active) {
-            $scope._orderId = active.orderId;
-            $scope._companyName = active.companyName;
-            $scope._customerAddress = active.customerAddress;
-            $scope._orderedItem = active.orderedItem;
-            $scope._orderCost = active.orderCost;
-            $scope._orderDate = active.orderDate;
-        }
-    });
-</script>
+<script src="./controller/orderCtrl.js"></script>
 </body>
 </html>
