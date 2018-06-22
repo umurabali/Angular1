@@ -55,8 +55,9 @@ app.controller('orderCtrl', function($scope, $http) {
         $scope._orderCost = active.orderCost;
         $scope._orderDate = active.orderDate;
         $scope.uniqueid = active._id;
-
+        $scope.isCreateVisible = false;
         $scope.invisible = true;
+
     }
 
     $scope.saveData = function(x) {
@@ -76,10 +77,16 @@ app.controller('orderCtrl', function($scope, $http) {
         }).then(function(response) {
             console.log(response.data);
             $scope.updateData();
+            hideForm();
         });
 
         $scope.invisible = false;
     }
-
-
+     $scope.createForm = function() {
+         $scope.isCreateVisible = true;
+         $scope.invisible = false;
+     }
+     $scope.hideForm = function(){
+        $scope.isCreateVisible = false;
+     }
 });

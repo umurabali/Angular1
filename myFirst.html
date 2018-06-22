@@ -7,7 +7,7 @@
 
 
 <div class="reu-container" ng-app="myApp" ng-controller="orderCtrl" >
-    <tr class="w3-container ">
+
     <div class = mini-header>AngularJS Crud Application </div>
         <table>
             <tr class="td-color">
@@ -23,12 +23,11 @@
 
         <tr ng-repeat="x in myData">
             <td align ="center">
-                <button class="btn delete_btn" ng-click="deleteData(x._id)"><i class="fas fa-times"></i></button>
+                <button class="btn delete_btn" ng-click="deleteData(x._id)" ><i class="fas fa-times"></i></button>
             </td>
             <td>
                 <button class="btn" ng-click="editData(x)">Edit</button>
             </td>
-
                <td>{{x.orderId}}</td>
                <td>{{x.companyName}}</td>
                <td>{{x.customerAddress}}</td>
@@ -43,15 +42,22 @@
         {{infoMessage}}
     </div>
     <div class="col-md-6 " align="right">
+        <right><button class="btn btn-secondary" ng-click="createForm()">Create</button></right>
         <right><button class="btn btn-secondary" ng-click="updateData()">Refresh</button></right>
     </div>
     </div>
-
+    <div ng-show = "isCreateVisible">
     <form ng-submit="createData()">
         <p>Orderid: <input type="text" ng-model="orderid"></p>
-        <p>CompanyName: <input type="text" ng-model="cname"></p>
+        <p>Company Name: <input type="text" ng-model="cname"></p>
+        <p>Customer Address: <input type="text" ng-model="caddress"></p>
+        <p>Ordered Item: <input type="text" ng-model="oitem"></p>
+        <p>Order Cost: <input type="text" ng-model="ocost"></p>
+        <p>Order Date: <input type="text" ng-model="odate"></p>
         <p><input type="submit" value="submit"></p>
+
     </form>
+    </div>
     <div ng-show = "invisible">
     <form ng-submit="saveData(uniqueid)">
         OrderID: <input type="text" ng-model="_orderId"><br>
